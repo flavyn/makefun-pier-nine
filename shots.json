@@ -1,0 +1,11 @@
+{
+  "game": "Pier Nine",
+  "viewport": { "width": 1280, "height": 720 },
+  "quality": 82,
+  "shots": [
+    { "name": "1-start.jpg", "query": "?shot=start&seed=1", "shows": "title screen: the attack, the controls" },
+    { "name": "2-shop.jpg", "query": "?shot=shop&seed=1", "shows": "buy phase: money and five things to spend it on" },
+    { "name": "3-play.jpg", "query": "?shot=play&seed=1", "shows": "live round on site A: HUD, defenders holding the lane, a rifle tracer" },
+    { "name": "4-end.jpg", "query": "?shot=result&seed=1", "shows": "round result: won, the reason, rounds and money" }
+  ]
+}
