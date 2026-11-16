@@ -22,13 +22,13 @@ const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPrefere
 renderer.setPixelRatio(1);
 renderer.setSize(window.innerWidth, window.innerHeight, false);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 2.15;
+renderer.toneMappingExposure = 2.35;
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(78, window.innerWidth / window.innerHeight, 0.08, 300);
 scene.add(camera);
 
-const lamp = new THREE.PointLight(0xffe0b0, 1.1, 5, 2.0);
+const lamp = new THREE.PointLight(0xffe0b0, 0.45, 4, 2.0);
 lamp.position.set(0.1, 0.05, -0.2);
 camera.add(lamp);
 
@@ -39,16 +39,16 @@ camera.add(muzzle);
 // A viewmodel only as detailed as it needs to be to read as a weapon in a screenshot.
 const viewmodel = new THREE.Group();
 const gunBody = new THREE.Mesh(
-  new THREE.BoxGeometry(0.12, 0.12, 0.5),
-  new THREE.MeshStandardMaterial({ color: 0x1d2329, roughness: 0.85, metalness: 0.05 }),
+  new THREE.BoxGeometry(0.07, 0.085, 0.34),
+  new THREE.MeshStandardMaterial({ color: 0x171c21, roughness: 0.95, metalness: 0.02 }),
 );
 const gunBarrel = new THREE.Mesh(
-  new THREE.BoxGeometry(0.055, 0.055, 0.42),
-  new THREE.MeshStandardMaterial({ color: 0x14181d, roughness: 0.9, metalness: 0.05 }),
+  new THREE.BoxGeometry(0.035, 0.035, 0.3),
+  new THREE.MeshStandardMaterial({ color: 0x101418, roughness: 0.95, metalness: 0.02 }),
 );
-gunBarrel.position.set(0, 0.02, -0.44);
+gunBarrel.position.set(0, 0.015, -0.3);
 viewmodel.add(gunBody, gunBarrel);
-viewmodel.position.set(0.3, -0.34, -0.7); viewmodel.scale.setScalar(0.66);
+viewmodel.position.set(0.26, -0.3, -0.6); viewmodel.scale.setScalar(0.9); viewmodel.rotation.set(-0.09, 0.22, 0.03);
 camera.add(viewmodel);
 
 const map = buildMap(scene);
@@ -335,7 +335,7 @@ function poseShot() {
     round.toast = '';
     hud.cache.overlay = '';
   }
-  if (shot === 'play') muzzle.intensity = 5;
+  if (shot === 'play') muzzle.intensity = 0.6;
   frozen = true;
 }
 

@@ -51,7 +51,7 @@ export function buildMap(scene) {
 
   const crateMaterial = new THREE.MeshStandardMaterial({ color: PALETTE.crate, roughness: 0.82 });
   const trimMaterial = new THREE.MeshStandardMaterial({
-    color: PALETTE.trim, emissive: PALETTE.trim, emissiveIntensity: 0.5, roughness: 0.5,
+    color: PALETTE.trim, emissive: PALETTE.trim, emissiveIntensity: 0.12, roughness: 0.6,
   });
   const unit = new THREE.BoxGeometry(1, 1, 1);
 
@@ -74,7 +74,7 @@ export function buildMap(scene) {
 
   // Site paint: a ring on the deck is the only "plant zone" marker, and it is readable at a glance.
   const siteMaterial = new THREE.MeshStandardMaterial({
-    color: PALETTE.paint, emissive: PALETTE.paint, emissiveIntensity: 0.35, roughness: 0.6,
+    color: PALETTE.paint, emissive: PALETTE.paint, emissiveIntensity: 0.26, roughness: 0.65,
   });
   for (const site of MAP.sites) {
     const ring = new THREE.Mesh(new THREE.RingGeometry(site.radius - 0.35, site.radius, 28), siteMaterial);
@@ -100,16 +100,16 @@ export function buildMap(scene) {
     head.scale.set(0.36, 0.14, 0.36);
     head.position.set(lamp.x, 2.85, lamp.z);
     scene.add(head);
-    const light = new THREE.PointLight(PALETTE.trim, 9, 13, 2);
+    const light = new THREE.PointLight(PALETTE.trim, 17, 15, 2);
     light.position.set(lamp.x, 2.7, lamp.z);
     scene.add(light);
   }
 
-  scene.add(new THREE.AmbientLight(0x44688a, 4.0));
-  const moon = new THREE.DirectionalLight(0xb8d6ef, 2.9);
+  scene.add(new THREE.AmbientLight(0x46688c, 4.3));
+  const moon = new THREE.DirectionalLight(0xc2dcf2, 3.4);
   moon.position.set(-10, 20, -8);
   scene.add(moon);
-  scene.add(new THREE.HemisphereLight(0x2d4f6c, 0x0a1119, 1.2));
+  scene.add(new THREE.HemisphereLight(0x3a6488, 0x0d1822, 2.0));
 
   return {
     walls,
