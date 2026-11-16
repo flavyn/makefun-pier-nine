@@ -53,7 +53,6 @@ export class Enemies {
       item.defusing = false;
     }
     this.aliveCount = 0;
-    this.rng = makeRng(0x9e3779b9);
   }
 
   spawn(count) {
