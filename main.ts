@@ -1,6 +1,6 @@
 // main.ts — hands Pier Nine in: copies game/ and screenshots/ out, then writes dossier.json with
 // the kit's own buildDossier, so the gate's rebuild is byte for byte the file this program writes.
-import { cpSync, existsSync, mkdirSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { buildDossier } from './vendor/makefun-threejs.ts';
 
@@ -32,8 +32,6 @@ cpSync(shots, join(out, 'screenshots'), { recursive: true });
 const dossier = buildDossier(repo, caps);
 writeFileSync(join(out, 'dossier.json'), dossier);
 
-let shotBytes = 0;
-for (const name of shotFiles) shotBytes += statSync(join(shots, name)).size;
-console.log(`dossier.json ${dossier.byteLength} B`);
-console.log(`screenshots ${shotFiles.length} files, ${shotBytes} B`);
-console.log(`game/ written to ${join(out, 'game')}`);
+// One fixed line and nothing else: run_deterministic compares two runs of this program, so stdout must
+// never carry the output directory, a byte count or a time.
+console.log('dossier written');

@@ -11,6 +11,7 @@ const HEAD = new THREE.SphereGeometry(0.24, 10, 8);
 const EYE = new THREE.SphereGeometry(0.07, 6, 6);
 const ARM = new THREE.BoxGeometry(0.16, 0.16, 0.62);
 
+
 export class Enemies {
   constructor(scene, map, sound) {
     this.scene = scene;
@@ -52,6 +53,7 @@ export class Enemies {
       item.defusing = false;
     }
     this.aliveCount = 0;
+    this.rng = makeRng(0x9e3779b9);
   }
 
   spawn(count) {
@@ -193,7 +195,8 @@ export class Enemies {
       item.patrolIndex = (item.patrolIndex + 1) % route.length;
       if (item.patrolIndex === 0 && item.hold) {
         item.state = 'hold';
-        item.holdTimer = 3.5 + Math.random() * 2.4;
+        item.holdCount = (item.holdCount || 0) + 1;
+        item.holdTimer = 3.5 + (((item.index || 0) * 7 + item.holdCount) % 10) * 0.24;
         item.scanPhase = 0;
       }
     }
@@ -259,9 +262,12 @@ export class Enemies {
     let dirY = dy / len;
     let dirZ = dz / len;
     const spread = ENEMY.spread * (player.aiming ? 1.15 : 1);
-    dirX += (Math.random() - 0.5) * spread;
-    dirY += (Math.random() - 0.5) * spread * 0.7;
-    dirZ += (Math.random() - 0.5) * spread;
+    item.shotCount = (item.shotCount || 0) + 1;
+    const swing = (((item.index || 0) * 37 + item.shotCount * 11) % 100) / 100 - 0.5;
+    const swing2 = (((item.index || 0) * 53 + item.shotCount * 17) % 100) / 100 - 0.5;
+    dirX += swing * spread;
+    dirY += swing2 * spread * 0.7;
+    dirZ += -swing * spread;
     const norm = Math.hypot(dirX, dirY, dirZ) || 1;
     dirX /= norm;
     dirY /= norm;
